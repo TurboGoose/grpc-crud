@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "ru.turbogoose.grpc";
+
+message ItemId {
+  int32 id = 1;
+}
+
+message ItemCreateRequest {
+  string name = 1;
+}
+
+message ItemInfoResponse {
+  int32 id = 1;
+  string name = 2;
+}
+
+message ItemPaginatedRequest {
+  int32 pageNumber = 1;
+  int32 pageLength = 2;
+}
+
+message ItemInfoPaginatedResponse {
+  repeated ItemInfoResponse Items = 1;
+}
+
+message Empty {}
+
+service ItemCrudService {
+  rpc getItemById(ItemId) returns (ItemInfoResponse);
+  rpc putItem(ItemCreateRequest) returns (ItemInfoResponse);
+  rpc deleteItemById(ItemId) returns (Empty);
+  rpc getPageOfItems(ItemPaginatedRequest) returns (ItemInfoPaginatedResponse);
+}
