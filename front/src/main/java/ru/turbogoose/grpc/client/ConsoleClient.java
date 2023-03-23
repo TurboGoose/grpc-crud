@@ -49,7 +49,7 @@ public class ConsoleClient {
 
     private void runPageRetrievingDialog() {
         System.out.print("Enter number of page: ");
-        int page = sc.nextInt();
+        int page = Math.max(sc.nextInt() - 1, 0);
         sc.nextLine();
 
         System.out.print("Enter size of page: ");

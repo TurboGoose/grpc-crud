@@ -2,6 +2,7 @@ package ru.turbogoose.grpc.client;
 
 public interface Prompts {
     String MENU = """
+            \n------------------------
             Choose option:
             1) Create item
             2) Get item by id
