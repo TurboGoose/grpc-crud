@@ -10,7 +10,7 @@ message ItemCreateRequest {
   string name = 1;
 }
 
-message ItemInfoResponse {
+message ItemInfo {
   int32 id = 1;
   string name = 2;
 }
@@ -21,14 +21,15 @@ message ItemPaginatedRequest {
 }
 
 message ItemInfoPaginatedResponse {
-  repeated ItemInfoResponse Items = 1;
+  repeated ItemInfo Items = 1;
 }
 
 message Empty {}
 
 service ItemCrudService {
-  rpc getItemById(ItemId) returns (ItemInfoResponse);
-  rpc putItem(ItemCreateRequest) returns (ItemInfoResponse);
-  rpc deleteItemById(ItemId) returns (Empty);
+  rpc getItemById(ItemId) returns (ItemInfo);
   rpc getPageOfItems(ItemPaginatedRequest) returns (ItemInfoPaginatedResponse);
+  rpc createItem(ItemCreateRequest) returns (ItemInfo);
+  rpc updateItem(ItemInfo) returns (ItemInfo);
+  rpc deleteItemById(ItemId) returns (Empty);
 }

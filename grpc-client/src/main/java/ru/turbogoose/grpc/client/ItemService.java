@@ -20,10 +20,6 @@ public class ItemService {
         return mapDtoToItem(stub.getItemById(itemId));
     }
 
-    public Item putItem(Item item) {
-        return mapDtoToItem(stub.putItem(mapItemToCreateRequest(item)));
-    }
-
     public List<Item> getPageOfItems(int page, int size) {
         ItemCrudServiceOuterClass.ItemPaginatedRequest paginatedRequest =
                 ItemCrudServiceOuterClass.ItemPaginatedRequest.newBuilder()
@@ -33,15 +29,30 @@ public class ItemService {
         return stub.getPageOfItems(paginatedRequest).getItemsList().stream().map(this::mapDtoToItem).toList();
     }
 
+    public Item createItem(Item item) {
+        return mapDtoToItem(stub.createItem(mapItemToCreateRequest(item)));
+    }
+
+    public Item updateItem(Item item) {
+        return mapDtoToItem(stub.updateItem(mapItemToDto(item)));
+    }
+
     public void deleteItemById(int id) {
         ItemCrudServiceOuterClass.ItemId itemId = ItemCrudServiceOuterClass.ItemId.newBuilder().setId(id).build();
         stub.deleteItemById(itemId);
     }
 
-    private Item mapDtoToItem(ItemCrudServiceOuterClass.ItemInfoResponse itemInfo) {
+    private Item mapDtoToItem(ItemCrudServiceOuterClass.ItemInfo itemInfo) {
         return Item.builder()
                 .id(itemInfo.getId())
                 .name(itemInfo.getName())
+                .build();
+    }
+
+    private ItemCrudServiceOuterClass.ItemInfo mapItemToDto(Item item) {
+        return ItemCrudServiceOuterClass.ItemInfo.newBuilder()
+                .setId(item.getId())
+                .setName(item.getName())
                 .build();
     }
 

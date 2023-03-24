@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>server</module>
         <module>protobuf</module>
-        <module>front</module>
+        <module>grpc-server</module>
+        <module>grpc-client</module>
     </modules>
 
     <properties>
