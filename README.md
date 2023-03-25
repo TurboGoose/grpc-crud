@@ -1,2 +1,2 @@
 # grpc-crud
-Simple app demonstrating communication between spring backend and react frontend through gRPC
+Simple app demonstrating CRUD operations between spring boot server and console client via gRPC.
